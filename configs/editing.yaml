@@ -1,0 +1,10 @@
+# Configuration for OmniText text editing (scripts/run_editing.py).
+# Use --ref ref1 (text editing) or --ref ref2 (style-based editing).
+gpu: 0
+seed: 8
+model_seed: 42
+dtype: float32          # editing runs in float32 (matches the original notebook)
+valid_res: [512, 2048]
+num_inference_steps: 20
+guidance_scale: 3
+strength: 1.0

@@ -1,0 +1,28 @@
+# OmniText runtime dependencies (pinned to the versions used for the paper).
+#
+# PyTorch is intentionally NOT pinned here because the right build depends on your
+# CUDA version. Install it first, e.g. for CUDA 12.1+:
+#   pip install torch==2.5.1 torchvision==0.20.1 torchaudio==2.5.1 \
+#       --index-url https://download.pytorch.org/whl/cu121
+# then: pip install -r requirements.txt
+
+# --- diffusion / models ---
+diffusers==0.24.0
+transformers==4.28.0
+tokenizers==0.13.3        # pinned for transformers 4.28 compatibility
+huggingface-hub==0.25.1
+accelerate==1.2.1
+safetensors==0.4.5
+xformers==0.0.28.post3    # optional: memory-efficient attention
+
+# --- core scientific / imaging ---
+numpy==1.24.4
+opencv-python==4.10.0.84
+pillow==10.2.0
+einops==0.6.1
+matplotlib==3.10.0        # used by notebooks/demo.ipynb
+
+# --- utilities ---
+tqdm==4.67.1
+pyyaml==6.0.2             # config files in configs/
+gdown==5.2.0              # dataset download (scripts/download_data.py)

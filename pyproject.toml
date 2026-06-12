@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "omnitext"
+version = "1.0.0"
+description = "OmniText: A Training-Free Generalist for Controllable Text-Image Manipulation (ICLR 2026)"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+authors = [
+    { name = "Agus Gunawan" },
+    { name = "Samuel Teodoro" },
+    { name = "Yun Chen" },
+    { name = "Soo Ye Kim" },
+    { name = "Jihyong Oh" },
+    { name = "Munchurl Kim" },
+]
+keywords = ["diffusion", "text-image-manipulation", "scene-text-editing", "training-free"]
+
+# Runtime dependencies are pinned in requirements.txt (PyTorch must be installed
+# separately for your CUDA version). Installing via `pip install -e .` registers the
+# `omnitext` package; run `pip install -r requirements.txt` for the full pinned set.
+dependencies = [
+    "numpy",
+    "pillow",
+    "opencv-python",
+    "einops",
+    "tqdm",
+    "pyyaml",
+    "gdown",
+    "huggingface-hub",
+]
+
+[project.urls]
+Paper = "https://openreview.net/forum?id=zF7GyVXVw6"
+Dataset = "https://drive.google.com/file/d/16J8wyhpGcFnYwZLWa_01DLUOczIKgHVy/view"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]

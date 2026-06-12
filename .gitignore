@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+
+# Model weights (downloaded via scripts/download_weights.py)
+sd-vae-ft-mse/
+weights/
+*.safetensors
+*.ckpt
+*.bin
+
+# Dataset (downloaded via scripts/download_data.py — redistribution prohibited)
+OmniText-Bench/
+OmniText_Dataset/
+*.zip
+
+# Experiment outputs
+experiments/
+outputs/
+
+# Local tooling / session state
+.claude/

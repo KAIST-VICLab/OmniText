@@ -1,0 +1,13 @@
+# Configuration for OmniText text insertion (scripts/run_insertion.py).
+# Use --ref ref1 (text insertion) or --ref ref2 (style-based insertion).
+gpu: 0
+seed: 8
+model_seed: 42
+dtype: float32
+valid_res: [512, 2048]
+num_inference_steps: 20
+guidance_scale: 3
+strength: 1.0
+# Constraint-loss scale; the original notebook uses 5 for ref1 and 2 for ref2.
+# Leave null to auto-pick by --ref, or set an explicit value here.
+adaptive_scale_con: null

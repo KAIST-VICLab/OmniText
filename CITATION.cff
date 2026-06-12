@@ -1,0 +1,37 @@
+cff-version: 1.2.0
+message: "If you use OmniText or OmniText-Bench, please cite the paper below."
+title: "OmniText: A Training-Free Generalist for Controllable Text-Image Manipulation"
+authors:
+  - family-names: "Gunawan"
+    given-names: "Agus"
+  - family-names: "Teodoro"
+    given-names: "Samuel"
+  - family-names: "Chen"
+    given-names: "Yun"
+  - family-names: "Kim"
+    given-names: "Soo Ye"
+  - family-names: "Oh"
+    given-names: "Jihyong"
+  - family-names: "Kim"
+    given-names: "Munchurl"
+year: 2026
+url: "https://openreview.net/forum?id=zF7GyVXVw6"
+preferred-citation:
+  type: conference-paper
+  title: "OmniText: A Training-Free Generalist for Controllable Text-Image Manipulation"
+  collection-title: "The Fourteenth International Conference on Learning Representations (ICLR)"
+  year: 2026
+  url: "https://openreview.net/forum?id=zF7GyVXVw6"
+  authors:
+    - family-names: "Gunawan"
+      given-names: "Agus"
+    - family-names: "Teodoro"
+      given-names: "Samuel"
+    - family-names: "Chen"
+      given-names: "Yun"
+    - family-names: "Kim"
+      given-names: "Soo Ye"
+    - family-names: "Oh"
+      given-names: "Jihyong"
+    - family-names: "Kim"
+      given-names: "Munchurl"

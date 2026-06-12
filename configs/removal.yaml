@@ -1,0 +1,13 @@
+# Configuration for OmniText text removal (scripts/run_removal.py).
+# Hyperparameters mirror the original OmniText_Removal notebook.
+
+gpu: 0                 # CUDA device index (overridable with --gpu)
+seed: 8               # generator seed for sampling
+model_seed: 42        # global seed_everything() seed
+dtype: float16        # model precision: float16 | float32
+
+valid_res: [512, 512] # attention-store resolution (removal works at 512x512)
+
+num_inference_steps: 20
+guidance_scale: 3
+strength: 1.0

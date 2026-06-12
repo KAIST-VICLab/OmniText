@@ -1,0 +1,11 @@
+name: omnitext
+channels:
+  - defaults
+dependencies:
+  - python=3.11
+  - jupyterlab
+  - pip
+  - pip:
+      # Install PyTorch separately first (see requirements.txt / README), then:
+      - -r requirements.txt
+      - -e .
