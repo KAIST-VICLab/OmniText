@@ -16,6 +16,16 @@ editing, insertion, style-based insertion, repositioning, and rescaling.
 
 ---
 
+## News
+
+- **[2026-06-13]** 🎉 Initial public release of the OmniText code and OmniText-Bench.
+
+> This is the initial release. We will keep the repository updated — if you run into
+> any issues, please [open an issue](../../issues); fixes and improvements will be
+> posted here.
+
+---
+
 ## Hardware requirements
 
 | Application            | Min. GPU memory |
