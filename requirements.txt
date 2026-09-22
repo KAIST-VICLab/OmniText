@@ -10,7 +10,7 @@
 diffusers==0.24.0
 transformers==4.28.0
 tokenizers==0.13.3        # pinned for transformers 4.28 compatibility
-huggingface-hub==0.25.1
+huggingface-hub==0.25.1   # model weights + OmniText-Bench download (scripts/download_data.py)
 accelerate==1.2.1
 safetensors==0.4.5
 xformers==0.0.28.post3    # optional: memory-efficient attention
@@ -25,4 +25,3 @@ matplotlib==3.10.0        # used by notebooks/demo.ipynb
 # --- utilities ---
 tqdm==4.67.1
 pyyaml==6.0.2             # config files in configs/
-gdown==5.2.0              # dataset download (scripts/download_data.py)

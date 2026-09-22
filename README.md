@@ -5,7 +5,7 @@ generalist for controllable text-image manipulation: removal, editing, style-bas
 editing, insertion, style-based insertion, repositioning, and rescaling.
 
 - 📄 **Paper / OpenReview:** https://openreview.net/forum?id=zF7GyVXVw6
-- 🗂️ **Benchmark (OmniText-Bench):** https://drive.google.com/file/d/16J8wyhpGcFnYwZLWa_01DLUOczIKgHVy/view
+- 🗂️ **Benchmark (OmniText-Bench):** https://huggingface.co/datasets/agusgun/OmniText-Bench
 
 <p align="center">
   <img src="assets/example_removal_business_card.png" width="32%"/>
@@ -18,6 +18,7 @@ editing, insertion, style-based insertion, repositioning, and rescaling.
 
 ## News
 
+- **[2026-09-22]** 🤗 OmniText-Bench is now hosted on the [Hugging Face Hub](https://huggingface.co/datasets/agusgun/OmniText-Bench); `scripts/download_data.py` downloads from there.
 - **[2026-06-13]** 🎉 Initial public release of the OmniText code and OmniText-Bench.
 
 > This is the initial release. We will keep the repository updated — if you run into
@@ -68,6 +69,13 @@ python scripts/download_weights.py
 > `stable-diffusion-v1-5/stable-diffusion-v1-5` automatically.
 
 ## Download the benchmark (OmniText-Bench)
+
+OmniText-Bench is hosted on the Hugging Face Hub as a **gated** dataset:
+https://huggingface.co/datasets/agusgun/OmniText-Bench
+
+1. Open the dataset page and accept the license terms (access is granted automatically).
+2. Authenticate with `huggingface-cli login` (or set `HF_TOKEN`).
+3. Run the download script:
 
 ```bash
 python scripts/download_data.py          # downloads + verifies ./OmniText-Bench

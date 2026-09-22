@@ -1,22 +1,28 @@
-"""Download the OmniText-Bench benchmark from Google Drive and verify its layout.
+"""Download the OmniText-Bench benchmark from the Hugging Face Hub and verify its layout.
+
+Dataset: https://huggingface.co/datasets/agusgun/OmniText-Bench
 
 OmniText-Bench is released under a custom license (attribution required, source-file
 redistribution prohibited). See the LICENSE.txt / TERMS.txt inside the download. This
 script only fetches the official release; it does not redistribute the assets.
 
+The dataset is *gated*: before downloading you must
+    1. open the dataset page above and accept the license terms, and
+    2. authenticate, either via `huggingface-cli login` or by passing a token
+       (`--token hf_...` or the HF_TOKEN environment variable).
+
 Usage:
     python scripts/download_data.py                 # -> ./OmniText-Bench
-    python scripts/download_data.py --output-dir .  # choose where to extract
-    python scripts/download_data.py --keep-zip      # keep the downloaded archive
+    python scripts/download_data.py --output-dir .  # choose where to download
+    python scripts/download_data.py --token hf_...  # explicit access token
 """
 import argparse
+import os
 import sys
-import zipfile
 from pathlib import Path
 
-# Google Drive file id from the public release link:
-# https://drive.google.com/file/d/16J8wyhpGcFnYwZLWa_01DLUOczIKgHVy/view
-DRIVE_FILE_ID = "16J8wyhpGcFnYwZLWa_01DLUOczIKgHVy"
+HF_REPO_ID = "agusgun/OmniText-Bench"
+HF_DATASET_URL = f"https://huggingface.co/datasets/{HF_REPO_ID}"
 
 EXPECTED_DIRNAME = "OmniText-Bench"
 EXPECTED_NUM_INPUTS = 150
@@ -32,9 +38,9 @@ EXPECTED_SUBDIRS = [
 
 def parse_args():
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    p.add_argument("--output-dir", default=".", help="Directory to extract OmniText-Bench into (default: current dir).")
-    p.add_argument("--zip-path", default="OmniText-Bench.zip", help="Where to save the downloaded archive.")
-    p.add_argument("--keep-zip", action="store_true", help="Keep the downloaded .zip after extraction.")
+    p.add_argument("--output-dir", default=".", help="Directory to place OmniText-Bench in (default: current dir).")
+    p.add_argument("--token", default=None,
+                   help="Hugging Face access token (defaults to HF_TOKEN env var or the cached login).")
     p.add_argument("--force", action="store_true", help="Re-download even if the dataset already exists.")
     return p.parse_args()
 
@@ -67,27 +73,33 @@ def main():
         sys.exit(0 if verify_layout(target) else 1)
 
     try:
-        import gdown
+        from huggingface_hub import snapshot_download
+        from huggingface_hub.utils import GatedRepoError, RepositoryNotFoundError
     except ImportError:
-        sys.exit("gdown is required: pip install gdown (or pip install -r requirements.txt)")
+        sys.exit("huggingface_hub is required: pip install huggingface_hub (or pip install -r requirements.txt)")
 
-    out_dir.mkdir(parents=True, exist_ok=True)
-    zip_path = Path(args.zip_path)
-    print(f"Downloading OmniText-Bench from Google Drive (id={DRIVE_FILE_ID}) ...")
-    gdown.download(id=DRIVE_FILE_ID, output=str(zip_path), quiet=False)
+    token = args.token or os.environ.get("HF_TOKEN") or None  # empty string -> use cached login
 
-    print(f"Extracting {zip_path} -> {out_dir} ...")
-    with zipfile.ZipFile(zip_path) as zf:
-        zf.extractall(out_dir)
-
-    if not target.exists():
-        # Archive may extract under a different top-level name; try to locate it.
-        candidates = [p for p in out_dir.iterdir() if p.is_dir() and (p / "labels.json").exists()]
-        if len(candidates) == 1 and candidates[0].name != EXPECTED_DIRNAME:
-            candidates[0].rename(target)
-
-    if not args.keep_zip:
-        zip_path.unlink(missing_ok=True)
+    print(f"Downloading OmniText-Bench from {HF_DATASET_URL} ...")
+    try:
+        snapshot_download(
+            repo_id=HF_REPO_ID,
+            repo_type="dataset",
+            local_dir=str(target),
+            token=token,
+            force_download=args.force,
+        )
+    except GatedRepoError:
+        sys.exit(
+            "\nAccess denied: OmniText-Bench is a gated dataset.\n"
+            f"  1. Accept the license terms at {HF_DATASET_URL}\n"
+            "  2. Authenticate with `huggingface-cli login`, or pass --token / set HF_TOKEN\n"
+        )
+    except RepositoryNotFoundError:
+        sys.exit(
+            f"\nRepository {HF_REPO_ID} not found or not accessible.\n"
+            "If you are not logged in, run `huggingface-cli login` first (the dataset is gated).\n"
+        )
 
     print("\nVerifying dataset layout...")
     ok = verify_layout(target)
