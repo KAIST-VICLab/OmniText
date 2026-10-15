@@ -179,3 +179,10 @@ If you use OmniText or OmniText-Bench, please cite:
 - **Code:** MIT - see [`LICENSE`](LICENSE).
 - **OmniText-Bench dataset:** custom license (attribution required), distributed
   separately via the link above - see the license files inside the download.
+
+### External dataset inference (SCUT-EnsText / ScenePair)
+
+Use `python scripts/run_external.py --help` for native SCUT-EnsText removal or
+ScenePair crop editing with the existing inference pipelines. See
+[formats, required text masks, CPU preflight, and usage examples](docs/external-datasets.md).
+Existing OmniText-Bench commands remain supported.
