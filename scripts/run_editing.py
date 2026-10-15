@@ -481,10 +481,10 @@ def main():
             target_text_list = []
             source_text_list = []
             for idx_ann in range(1):
-                source_text = anns[ref]['text']['target']
+                source_text = anns[ref]['text'].get('reference_source') or anns[ref]['text']['target']
                 target_text = anns[ref]['text']['target']
                 if True:
-                    source_text_list.append(target_text)
+                    source_text_list.append(source_text)
                 
                     target_text_list.append(target_text)
                     first_text_boost_mask_dict[idx_ann] = {}

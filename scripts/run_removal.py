@@ -447,7 +447,13 @@ def main():
             # 3.1. prepare removal mask
             image_mask_list = []
         
-            if True:
+            if 'mask' in anns:
+                mask_image = Image.open(Path(args.dataset_root) / anns['mask']).convert('L')
+                if mask_image.size != image.size:
+                    raise ValueError('Removal mask and input dimensions must match')
+                image_mask_list.append(torch.tensor(np.array(mask_image) >= 128,
+                    device=device, dtype=dtype).unsqueeze(0).unsqueeze(0))
+            else:
                 mask_polygon = anns['polygon']
     
                 polygon = np.array(mask_polygon).reshape(-1, 2)
